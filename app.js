@@ -34,7 +34,7 @@ const getImages = (query) => {
     fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
         .then(response => response.json())
         .then(data => showImages(data.hits))
-        .catch(err => console.log(err));
+        .catch(err => window.alert('err'));
 }, 2000);
     
 };
@@ -49,8 +49,8 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   } else {
-    alert('Hey, Already added !');
-    // sliders.splice(item);
+    // alert('Hey, Already added !');
+    sliders = sliders.filter(item => item.indexOf(img));
   }
 }
 var timer
@@ -130,10 +130,9 @@ search.addEventListener("keypress", function(event) {
   searchBtn.click();
 });
 
-
 sliderBtn.addEventListener('click', function () {
   const duration = document.getElementById('doration').value || 1000;
-  if (duration < 0) {
+  if (duration <= 0) {
       alert('Negative value not accepted');
   } else {
       createSlider();
